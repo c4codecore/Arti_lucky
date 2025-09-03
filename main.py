@@ -17,11 +17,31 @@
 
 # 3 Sept 2025
 
-li = [100,20,150,125,200,15,150,99]
-max = li[0]
+# li = [100,20,150,125,200,15,150,99]
+# max = li[0]
 
-for i in li:  
-    if i > max:  
-        max = i
+# for i in li:  
+#     if i > max:  
+#         max = i
 
-print(max)
+# print(max)
+
+
+# Elephant
+
+# vowels count
+
+li_1= [1, 2, 3]
+li_2= [4, 5, 6]
+
+length = len(li_2) # 3
+
+for i in range(length): # 0 1 2 
+
+# 1 4
+# 2 5
+# 3 6
+
+
+
+
