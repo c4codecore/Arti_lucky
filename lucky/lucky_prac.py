@@ -12,12 +12,26 @@ print("ok")
 #     min=i
 # print(min)
 # max=li[]
-li1=[1,2,3]
-li2=[4,5,6]
-length=len(li1)
-for i in range(length):
-    print(li1[i],li2[i])
+# li1=[1,2,3]
+# li2=[4,5,6]
+# length=len(li1)
+# for i in range(length):
+#     print(li1[i],li2[i])
 
-# for i in li1:
+# # for i in li1:
 #   if i in li2:
 #     print(i)
+li=[100,200,300,500,600]
+max=li[0]
+max2=li[1]
+for i in li:
+    if i>max:
+        
+        max=i
+    elif i>max2 and i!=max:
+        max2=i
+print(i)
+
+# Elephant
+
+# vowels count
