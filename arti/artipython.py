@@ -50,26 +50,92 @@
 #     elif list1[i]>second_largest:
 #         second_largest=list1[i]
 # print(second_largest)
-    
+    # list1=[18,99,77,86,54,109,105]
 
-#list1=[18,99,77,86,54,109,105]
-list1=[9,8,7,6,5,4]
-if list1[0]>list1[1]>list[2]:
-    largest=list1[0]
-    second_largest=list1[1]
-    third_largest=list1[2]
-else:
-    largest=list1[2]
-    second_largest=list1[0]
-    third_largest=list1[1]
-for i in range(3,len(list1)):
-    if list1[i]>largest:
-        second_largest=largest
-        largest=list1[i]
-    elif list1[i]>second_largest:
-        second_largest=list1[i]
-    elif list1[i]>third_largest:
-        third_largest=list1[1]
-print("the third largest number:",third_largest)
-print("the second largest number:",second_largest)
-print("the first largest number:",largest)
+# largest=list1[0]
+# second_largest=list1[1]
+# third_largest=list1[2]
+# if list1[0]>list1[1]and list1[0]>list1[2]:
+#     largest=list1[0]
+#     if list1[1]>list1[2]
+#     second_largest=list1[1]
+#     third_largest=list1[2]
+#     else:
+#     second_largest=list1[0]
+#     third_largest=list1[1]
+# elif list1[2]>list1[0]and list1[2]>list[1]   
+#       if list1[0]>list1[]
+# for i in range(3,len(list1)):
+#     if list1[i]>largest:
+#         second_largest=largest
+#         largest=list1[i]
+#     elif list1[i]>second_largest:
+#         second_largest=list1[i]
+#     elif list1[i]>third_largest:
+#         third_largest=list1[1]
+# print("the third largest number:",third_largest)
+# print("the second largest number:",second_largest)
+# print("the first largest number:",largest)
+
+# x=10
+# y=20
+# z=30
+# first=0
+# second=0
+# third=0
+# if x>y and x>z:
+#     first=x
+#     if y>z:
+#         second=y
+#         third=z
+#     else:
+#         second=z
+#         third=y
+# elif y>z and y>x:
+#     first=y
+#     if x>z:
+#         second=x
+#         third=z
+#     else:
+#         second=z
+#         third=x
+# elif z>x and z>y:
+#     first=z
+#     if x>y:
+#         second=x
+#         third=y
+#     else:
+#         second=y
+#         third=x
+# print(first)
+# print(second)
+# print(third)
+     
+
+# i=2
+# while i<=20:
+#  print(i)
+#  i=i+5
+
+# n=int(input("enter the number:"))
+# total=0
+# i=1
+# while i<=n:
+#     total+=i
+#     i+=1
+# print("the sum of number: 1 to",n,"__",total)
+
+
+# password=""
+# while password !="arti1234":
+#     password = input("enter the passward:")
+# print("correct passward successful enter")
+
+# for i in range(1,100):
+#     if i%2==0:
+#         print(i)
+i=1
+while i<=100:
+    if i%2==0:
+        print("even number:",i)
+    i=i+1
