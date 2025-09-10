@@ -134,8 +134,72 @@
 # for i in range(1,100):
 #     if i%2==0:
 #         print(i)
-i=1
-while i<=100:
+# i=1
+# while i<=100:
+#     if i%2==0:
+#         print("even number:",i)
+#     i=i+1
+
+# i=1
+# count=0
+# while i <=100:
+#     if i%2==0:
+#         count+=1
+#     i=i+1
+# print(f"total even numbers from 1 to 100 is: {count}")
+
+# i=1
+# sum=0
+# while i<=100:
+#     if i%2==0:
+#         sum+=i
+#     i=i+1
+# print(f"sum of all even numbers 1 to 100: {sum}")
+
+# i=1
+# total=0
+# count=0
+# while i<=100:
+#     if i%2==0:
+#         total+=i
+#         count+=1
+#     i=i+1
+# # print(total,count)
+# print(f"avg number 1 to 100 : {total/count}")
+
+i=5
+while i >=1: 
+    print(i)
+    i=i-1
+
+# i=10
+# while i>=1:
+#     if i%2==0:
+#         print(i)
+#     i=i-1
+
+# i=10
+# count=0
+# while i>=1:
+#     if i%2==0:
+#        count+=1
+#     i=i-1
+# print(f"even number :{count}")
+    
+# i=10
+# total=0
+# while i>=1:
+#     if i%2==0:
+#         total+=i
+#     i=i-1
+# print(f"the total of even number:{total}")
+
+i=10
+total=0
+count=0
+while i>=1:
     if i%2==0:
-        print("even number:",i)
-    i=i+1
+        total+=i
+        count+=1
+    i=i-1
+print(f"avg number of even :{total/count}")
