@@ -35,3 +35,54 @@ print(i)
 # Elephant
 
 # vowels count
+a=10
+b=20
+if a>b:
+    max=a
+    min=b
+
+else:
+    max=b
+    min=a
+print(max)
+a=10
+b=20
+c=30
+first=0
+second=0
+third=0
+if a>b and a>c:
+    first=a
+    if b>c:
+        second=b
+        third=c
+    else:
+        second=c
+        third=b     
+elif b>a and b>c:
+    first=b
+    if a>c:
+        second=a
+        third=c
+    else:
+        second=c
+        third=a
+elif c>b and c>a:
+    first=c
+    if b>a:
+        second=b
+        third=a
+    else:
+        third=b
+        second=a
+print(first,second,third)
+
+
+password=""
+while password != "password123":
+  password=input("Enter password : ")
+print("Access Granted")
+
+
+
+
