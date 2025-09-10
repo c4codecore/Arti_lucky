@@ -203,3 +203,6 @@ while i>=1:
         count+=1
     i=i-1
 print(f"avg number of even :{total/count}")
+
+
+khg
