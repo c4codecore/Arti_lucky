@@ -1,1 +1,0 @@
-# Arti_lucky
