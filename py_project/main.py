@@ -2,8 +2,8 @@
 from send_email import send_email
 
 email_list = [
-    ("Lucky", "coolluckyboy30@gmail.com"),
-    ("Neeraj Sharma", "nrjsrm07@gmail.com"),
+    # ("Lucky", "coolluckyboy30@gmail.com"),
+    # ("Neeraj Sharma", "nrjsrm07@gmail.com"),
     ("Arti", "artigulia1123@gmail.com")
 ]
 
