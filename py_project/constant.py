@@ -1,2 +1,2 @@
-SUBJECT = "Welcome to Code Core"
-MESSAGE = "Wishing you and your family a Holi filled with colors of joy, happiness, and success!"
+SUBJECT = "Welcome to Our College"
+MESSAGE = "there will be no classes on occassion of Diwali"
