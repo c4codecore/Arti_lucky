@@ -1,11 +1,16 @@
-
+import csv
 from send_email import send_email
 
-email_list = [
-    # ("Lucky", "coolluckyboy30@gmail.com"),
-    # ("Neeraj Sharma", "nrjsrm07@gmail.com"),
-    ("Arti", "artigulia1123@gmail.com")
-]
+email_list = []
+with open("emails.csv", mode="r", encoding="utf-8") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        name = row["Name"]
+        email = row["Email"]
+        name_email = (name, email)
+        email_list.append(name_email)
+
+print(email_list)
 
 formatted_email_list = []
 
