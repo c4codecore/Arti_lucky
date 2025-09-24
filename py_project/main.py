@@ -10,8 +10,6 @@ with open("emails.csv", mode="r", encoding="utf-8") as file:
         name_email = (name, email)
         email_list.append(name_email)
 
-print(email_list)
-
 formatted_email_list = []
 
 for name, email in email_list:
