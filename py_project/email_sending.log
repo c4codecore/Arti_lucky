@@ -1,3 +1,9 @@
 2025-09-24 03:15:58 - INFO - Email sent successfully to coolluckyboy30@gmail.com
 2025-09-24 03:16:01 - INFO - Email sent successfully to nrjsrm07@gmail.com
 2025-09-24 03:16:04 - INFO - Email sent successfully to artigulia1123@gmail.com
+2025-09-24 03:48:26 - ERROR - Failed to send email to coolluckyboy30@gmail.com: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-269803416a2sm172792985ad.134 - gsmtp')
+2025-09-24 03:48:28 - ERROR - Failed to send email to nrjsrm07@gmail.com: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-2698016c081sm178013825ad.41 - gsmtp')
+2025-09-24 03:48:30 - ERROR - Failed to send email to artigulia1123@gmail.com: (535, b'5.7.8 Username and Password not accepted. For more information, go to\n5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-26980053c88sm177392585ad.19 - gsmtp')
+2025-09-24 04:01:25 - INFO - Email sent successfully to coolluckyboy30@gmail.com
+2025-09-24 04:01:29 - INFO - Email sent successfully to nrjsrm07@gmail.com
+2025-09-24 04:01:32 - INFO - Email sent successfully to artigulia1123@gmail.com
