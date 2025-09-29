@@ -62,23 +62,52 @@
 #     elif li[i] > second_largest:
 #         second_largest = li[i]
 
-print("===== MENU =====")
-print("1. Greet")
-print("2. Show Course List")
-print("3. Exit")
+# print("===== MENU =====")
+# print("1. Greet")
+# print("2. Show Course List")
+# print("3. Exit")
 
-choice = int(input("Enter your choice (1-3): "))
+# choice = int(input("Enter your choice (1-3): "))
 
-match choice:
-    case 1:
-        print("Hello! Welcome to Code Core Computer Center")
-    case 2:
-        print("Courses Offered:")
-        print("1. Basic Computer Course")
-        print("2. Python Programming")
-        print("3. Web Designing")
-        print("4. Data Analytics")
-    case 3:
-        print("Thank you! Goodbye")
-    case _:
-        print("Invalid choice. Please select between 1 to 3.")
+# match choice:
+#     case 1:
+#         print("Hello! Welcome to Code Core Computer Center")
+#     case 2:
+#         print("Courses Offered:")
+#         print("1. Basic Computer Course")
+#         print("2. Python Programming")
+#         print("3. Web Designing")
+#         print("4. Data Analytics")
+#     case 3:
+#         print("Thank you! Goodbye")
+#     case _:
+#         print("Invalid choice. Please select between 1 to 3.")
+
+# name ="Arti"
+# name2="Lucky"
+# name3="Shivansh"
+# print(f"|{name}|")  # |Python    |
+# print(f"|{name2}|")  # |Python    |
+# print(f"|{name3}|")  # |Python    |
+
+laptop ="45000"
+charger= "1500"
+ppf="350"
+
+# print(f"|{"Laptop Price":<20}{":":^3}{laptop:>10}|") 
+# print(f"|{"Charger Price":<20}{":":^3}{charger:>10}|") 
+# print(f"|{"PPF Price":<20}{":":^3}{ppf:>10}|") 
+
+# |Laptop Price         :      45000|
+# |Charger Price        :       1500|
+# |PPF Price            :        350|
+
+# print(f"|{"Laptop Price":<20}{":":^3}{laptop:>10}|\n|{"Charger Price":<20}{":":^3}{charger:>10}|\n|{"PPF Price":<20}{":":^3}{ppf:>10}|") 
+
+
+print(f"|{"Laptop Price":<20}{":":^3}{laptop:0>5}|") 
+print(f"|{"Charger Price":<20}{":":^3}{charger:0>5}|") 
+print(f"|{"PPF Price":<20}{":":^3}{ppf:0>5}|") 
+
+
+res = ""
