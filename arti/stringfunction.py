@@ -467,8 +467,195 @@
 # print(alp,num)
 
 
-tup=(10,20,30,40,50)
-li=list(tup)
-li.reverse()
-tup=tuple(li)
-print(tup)
+# tup=(10,20,30,40,50)
+# li=list(tup)
+# li.reverse()
+# tup=tuple(li)
+# print(tup)
+
+
+# tup=[(10,20,30),(40,50,60),(70,80,90)]
+# new_value=100
+# new_list=[]
+# for t in tup: #t=(10,20,30)
+#      li=list(t)
+#      li[-1]=100
+#      tup1=tuple(li)
+#      new_list.append(tup1)
+# print(new_list)
+
+
+# tup=[(10,20,30),(),(40,50),()]
+# for t in tup: #t=(10,20,30)
+#     if t==():
+#         print(True)
+#     else:
+#         print(False)
+
+
+# tup=[(10,20,30),(),(40,50),()]
+# blank=[]
+# for i in tup:
+#     if i!=():
+#         blank.append(i)
+# print(blank)
+ 
+# my_list=[10,20,30]
+# my_list[-1]=50
+# print(my_list)
+
+# tup=(10,20,30,40)
+# li=list(tup)
+# li[-1]=60
+# tup=tuple(li)
+# print(tup)
+
+# tup=[(1,2),(3,4),(5,6)]
+# res=[]
+# for t in tup: #t=(1,2)
+#     sum=t[0]+t[1]    
+#     res.append(sum)
+# print(res)
+
+# tup=[(1,2),(3,4),(4,5,6)]
+# res=[]
+# for t in tup:
+#     total=0
+#     for i in t:
+#         total=total+i 
+#     res.append(total)
+# print(res)
+
+# tup=[(1,2),(3,4),(4,5,6)]
+# total=sum(tup)
+# for i in tup:
+#      print("total sum=",total)
+
+# d=dict()
+# d["name"]='arti'
+# d["class"]='12th'
+# d["roll no"]='18'
+# print(d)
+
+# d={"name":"james bond","100":"vishal"}
+# print(d["100"])
+
+# d={"name":"james bond","100":"vishal"}
+# d['age']=50
+# print(d)
+
+# d={"name":"james bond","100":"vishal"}
+# d["100"]='arti'
+# print(d)
+
+# d={"name":"james bond","100":"vishal",100:"rahul"}
+# print(d.get("400","neeraj sir"))
+
+# d={"name":"james bond","100":"vishal"}
+# print(d.clear())
+
+# d={"name":"james bond","100":"vishal","200":"mohan"}
+# del d["name"]
+# del d["200"]
+# print(d)
+
+# d={"name":"james bond","100":"vishal","200":"mohan"}
+# del d
+# print (d)
+
+# lucky={"name":"james bond","100":"vishal","200":"mohan"}
+# d=len(lucky)
+# print(lucky,d)
+
+# d={"name":"james bond","100":"vishal","200":"mohan"}
+# print(d.pop("200"))
+
+# d={"name":"james bond","100":"vishal","200":"mohan"}
+# print(d.popitem())
+
+# d={"name":"james bond","100":"vishal","200":"mohan"}
+# key=d.keys()
+# keys=list(key)
+# print(keys,key)
+
+# d={"name":"james bond","100":"vishal","200":"mohan"}
+# v=d.values()
+# values=list(v)
+# print(values,v)
+
+# d={"name":"james bond","100":"vishal","200":"mohan"}
+# #i=d.items()
+# for k,v in d.items():
+#     print(k,"*******",v)
+
+# d={'a':100,'b':200,'c':300}
+# s=sum(d.values())
+# print("sum",s)
+
+# dict={'a':100,'b':200,'c':300}
+# total=0
+# for i in dict: #'a'
+#          total=total+dict[i] #100
+# print("sum :", total)
+
+# d={'a':120,'b':1000,'c':3500,'d':40}
+# m=min(d.values())
+# print("min",m)
+
+# d={'a':120,'b':1000,'c':3500,'d':490}
+# m=max(d.values())
+# print("max",m)
+
+# list1=["apple","banana","mango","apple","mango"]
+# d={}
+# for x in list1:
+#     d[x]=d.get(x,0)+1
+# for k,v in d.items():
+#     print(k,"occ",v,"times")
+
+# d={"a":10,"b":20}
+# if d == {}:
+#     print("empty dict")
+# else:
+#     print("dic")
+
+# d={"a":10,"b":20}
+# d1=d.copy()
+# i=id(d)
+# v=id(d1)
+# print(d1,v)
+# print(d,i)
+# print(d1==d)
+# print(v==i)
+
+# dict=input("enter any word :")
+# d={}
+# for x in dict:
+#     d[x]=d.get(x,0)+1
+# for k,v in d.items():
+#     print(k,"occur",v,"times")
+
+# n=int(input("enter the students dictonary :"))
+# d={}
+# for i in range(n):
+#     name=("enter the name:")
+#     marks=("enter the marks:")
+# print(d)
+
+# n=eval(input("enter the value:"))
+# print(dict(n))
+
+def odd_even():
+    n=int(input("enter the number :"))
+    if n%2==0:
+        print(f"{n} is even number")
+    else:
+        print(f"{n} is odd number")
+# odd_even()
+
+def wish():
+    print("hello")
+wish()
+# odd_even()
+wish()
+# odd_even()

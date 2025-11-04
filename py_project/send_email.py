@@ -24,7 +24,7 @@ def send_email(html_body, email_list):
     for name, to_email in email_list:
         try:
             # ---------- Create the email ----------
-            msg = MIMEMultipart('alternative')   # Create a MIME email object
+            msg = MIMEMultipart('alternative')   # Create a MIME email object multipurpuse internet mail extenstion
             msg['From'] = EMAIL_USER             # Sender email address
             msg['To'] = to_email                 # Recipient email address
             msg['Subject'] = SUBJECT             # Email subject
