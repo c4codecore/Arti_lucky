@@ -1,113 +1,67 @@
-# # # li=[10,20,30,40]
-# # # length = len(li) # 4
+import pandas as pd
+import numpy as np
 
-# # # for i in range(length-1, -1, -1): # 3 2 1 0
-# # #     print(li[i])
+# 1. Read all data without a header to inspect and construct the two-level header
+df_all = pd.read_excel("input.xlsx", header=None)
 
-# # # for i in range(1, length+1): # 1 2 3 4
-# # #     print(li[-i])
+# 2. Extract header rows (R3 is index 2, R4 is index 3)
+r3 = df_all.iloc[2]
+r4 = df_all.iloc[3]
 
+# 3. Prepare the combined header (indices 3 to 10)
+# Forward fill R3 to spread the 'Above Function' name
+r3_filled = r3.iloc[3:11].ffill()
 
-# # # -3 -2 -1 0 1 2 3 4 5 6
+# Combine R3 (Above Function) and R4 (Attribute)
+combined_headers = (r3_filled + '_' + r4.iloc[3:11]).tolist()
 
-# # # range left se right means positively ---> end-1
-# # # range right se left means negatively ---> end+1
+# 4. Construct the full list of new column names
+new_columns = ['col_to_drop_0', 'Function', 'col_to_drop_2'] + combined_headers
+# Check if there is a column 11 and append a name if so
+if df_all.shape[1] > len(new_columns):
+    new_columns.append('col_to_drop_11')
 
+# 5. Create a new DataFrame using the original data from row 5 onwards (index 5)
+df = df_all.iloc[5:].copy()
+df.columns = new_columns
 
+# Drop auxiliary columns
+df = df.drop(columns=['col_to_drop_0', 'col_to_drop_2', 'col_to_drop_11'], errors='ignore')
 
-# # # 3 Sept 2025
+# 6. Melt the DataFrame to unpivot the data
+df_long = df.melt(
+    id_vars=['Function'],
+    var_name='Combined_Attribute',
+    value_name='Value'
+).dropna(subset=['Value']) # Drop rows where the email/Value is NaN
 
-# # # li = [100,20,150,125,200,15,150,99]
-# # # max = li[0]
+# 7. Split the 'Combined_Attribute' into 'Above Function' and 'Attribute'
+df_long[['Above Function', 'Attribute']] = df_long['Combined_Attribute'].str.split('_', n=1, expand=True)
 
-# # # for i in li:  
-# # #     if i > max:  
-# # #         max = i
+# 8. Explode the 'Value' column to handle multiple semicolon-separated emails
+# Clean up value string, split by ';', and then explode
+df_long['Value'] = df_long['Value'].str.replace(' ', '', regex=False).str.split(';')
+df_exploded = df_long.explode('Value').reset_index(drop=True)
 
-# # # print(max)
+# Final cleanup of email values and removing empty rows
+df_exploded['Value'] = df_exploded['Value'].str.strip()
+df_exploded = df_exploded.dropna(subset=['Value'])
+df_exploded = df_exploded[df_exploded['Value'] != '']
 
+# 9. Add constant columns: 'Zone' and 'Country'
+df_exploded['Zone'] = 'AOA'
+df_exploded['Country'] = 'Thailand'
 
-# # # Elephant
+# 10. Select and reorder columns to match the desired output format
+final_df = df_exploded[[
+    'Zone',
+    'Country',
+    'Function',
+    'Value',
+    'Attribute',
+    'Above Function'
+]]
 
-# # # vowels count
-
-# # # li_1= [1, 2, 3]
-# # # li_2= [4, 5, 6]
-
-# # # length = len(li_2) # 3
-
-# # # for i in range(length): # 0 1 2 
-
-# # # 1 4
-# # # 2 5
-# # # 3 6
-
-# # # 1) git pull
-# # # 2) message--> commit --> sync
-
-
-# # li = [10,20,30,25,24,45]
-
-# # if li[0] > li[1]:
-# #     largest = li[0]
-# #     second_largest = li[1]
-# # else:
-# #     largest = li[1]
-# #     second_largest = li[0]
-
-# # for i in range(2, len(li)): 
-# #     if li[i] > largest:  
-# #         second_largest = largest
-# #         largest = li[i]
-# #     elif li[i] > second_largest:
-# #         second_largest = li[i]
-
-# # print("===== MENU =====")
-# # print("1. Greet")
-# # print("2. Show Course List")
-# # print("3. Exit")
-
-# # choice = int(input("Enter your choice (1-3): "))
-
-# # match choice:
-# #     case 1:
-# #         print("Hello! Welcome to Code Core Computer Center")
-# #     case 2:
-# #         print("Courses Offered:")
-# #         print("1. Basic Computer Course")
-# #         print("2. Python Programming")
-# #         print("3. Web Designing")
-# #         print("4. Data Analytics")
-# #     case 3:
-# #         print("Thank you! Goodbye")
-# #     case _:
-# #         print("Invalid choice. Please select between 1 to 3.")
-
-# # name ="Arti"
-# # name2="Lucky"
-# # name3="Shivansh"
-# # print(f"|{name}|")  # |Python    |
-# # print(f"|{name2}|")  # |Python    |
-# # print(f"|{name3}|")  # |Python    |
-
-# laptop ="45000"
-# charger= "1500"
-# ppf="350"
-
-# # print(f"|{"Laptop Price":<20}{":":^3}{laptop:>10}|") 
-# # print(f"|{"Charger Price":<20}{":":^3}{charger:>10}|") 
-# # print(f"|{"PPF Price":<20}{":":^3}{ppf:>10}|") 
-
-# # |Laptop Price         :      45000|
-# # |Charger Price        :       1500|
-# # |PPF Price            :        350|
-
-# # print(f"|{"Laptop Price":<20}{":":^3}{laptop:>10}|\n|{"Charger Price":<20}{":":^3}{charger:>10}|\n|{"PPF Price":<20}{":":^3}{ppf:>10}|") 
-
-
-# print(f"|{"Laptop Price":<20}{":":^3}{laptop:0>5}|") 
-# print(f"|{"Charger Price":<20}{":":^3}{charger:0>5}|") 
-# print(f"|{"PPF Price":<20}{":":^3}{ppf:0>5}|") 
-
-
-# res = ""
+# Write the result to a new CSV file
+output_file_name = 'transformed_output.csv'
+final_df.to_csv(output_file_name, index=False)

@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MySQL Beginner Exam – Code Core</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --bg: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            padding: 16px;
+        }
+
+        .exam-wrapper {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .exam-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            padding: 20px 24px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+            margin-bottom: 24px;
+        }
+
+        .exam-header h1 {
+            margin: 0 0 4px;
+            font-size: 1.6rem;
+            letter-spacing: 0.03em;
+        }
+
+        .exam-header p {
+            margin: 2px 0;
+            font-size: 0.9rem;
+            color: #e5e7eb;
+        }
+
+        .badge-row {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.8rem;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.2);
+            border: 1px solid rgba(209, 213, 219, 0.5);
+        }
+
+        .exam-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 20px 18px;
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title span {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: var(--primary);
+        }
+
+        .question-card {
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            padding: 14px 14px 10px;
+            margin-bottom: 10px;
+            background: #f9fafb;
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.96rem;
+        }
+
+        .options {
+            margin-top: 4px;
+        }
+
+        .option-label {
+            display: block;
+            padding: 6px 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.93rem;
+            transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+        }
+
+        .option-label:hover {
+            background: #e5f0ff;
+        }
+
+        .option-label input {
+            margin-right: 6px;
+        }
+
+        .correct-option {
+            background: #dcfce7 !important;
+            border: 1px solid #22c55e;
+        }
+
+        .wrong-option {
+            background: #fee2e2 !important;
+            border: 1px solid #ef4444;
+        }
+
+        .question-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+        }
+
+        .actions-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 10px 22px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.15s ease, transform 0.08s ease, box-shadow 0.08s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.45);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-ghost:hover {
+            background: #f3f4f6;
+        }
+
+        .result-panel {
+            display: none;
+            margin-top: 14px;
+            border-radius: 14px;
+            padding: 14px 14px 10px;
+            background: #ecfdf5;
+            border: 1px solid #6ee7b7;
+            font-size: 0.95rem;
+        }
+
+        .result-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .result-main {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .result-tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .tag-good {
+            background: #22c55e;
+            color: #f0fdf4;
+        }
+
+        .tag-ok {
+            background: #f97316;
+            color: #fff7ed;
+        }
+
+        .tag-bad {
+            background: #ef4444;
+            color: #fef2f2;
+        }
+
+        .answer-log {
+            margin-top: 8px;
+            max-height: 260px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .answer-log p {
+            margin: 2px 0;
+            font-size: 0.82rem;
+        }
+
+        .answer-correct {
+            color: #15803d;
+        }
+
+        .answer-wrong {
+            color: #b91c1c;
+        }
+
+        @media (max-width: 640px) {
+            .exam-header {
+                padding: 16px 16px;
+                border-radius: 14px;
+            }
+            .exam-header h1 {
+                font-size: 1.4rem;
+            }
+            .exam-card {
+                padding: 16px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="exam-wrapper">
+
+    <header class="exam-header">
+        <h1>MySQL Beginner Level Exam</h1>
+        <p>Code Core Computer Center – Objective Test</p>
+        <p>Topics: CREATE DATABASE, INSERT, UPDATE, ALTER, LIMIT, MIN, MAX, COUNT, AVG, SUM, ORDER BY, LIKE, BETWEEN, Constraints</p>
+        <div class="badge-row">
+            <span class="badge">25 MCQs</span>
+            <span class="badge">All questions compulsory</span>
+            <span class="badge">Auto-checked • No negative marking</span>
+        </div>
+    </header>
+
+    <form id="examForm" class="exam-card">
+
+        <div class="section-title">
+            <span></span>
+            <div>Section A – Multiple Choice Questions</div>
+        </div>
+
+        <!-- Q1 -->
+        <div class="question-card">
+            <div class="question-meta">Q1 · Basic Database Command</div>
+            <div class="question-text">1. Which command is used to create a new database?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q1" value="CREATE DATABASE" required>
+                    CREATE DATABASE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q1" value="MAKE DATABASE">
+                    MAKE DATABASE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q1" value="NEW DB">
+                    NEW DB
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q1" value="INIT DATABASE">
+                    INIT DATABASE
+                </label>
+            </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-card">
+            <div class="question-meta">Q2 · Table Structure</div>
+            <div class="question-text">2. Which command adds a new column to an existing table?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q2" value="ALTER TABLE" required>
+                    ALTER TABLE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q2" value="UPDATE TABLE">
+                    UPDATE TABLE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q2" value="ADD COLUMN">
+                    ADD COLUMN
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q2" value="INSERT TABLE">
+                    INSERT TABLE
+                </label>
+            </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-card">
+            <div class="question-meta">Q3 · Data Entry</div>
+            <div class="question-text">3. Which query is used to insert data into a table?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q3" value="INSERT INTO" required>
+                    INSERT INTO
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q3" value="ADD INTO">
+                    ADD INTO
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q3" value="PUT INTO">
+                    PUT INTO
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q3" value="UPDATE">
+                    UPDATE
+                </label>
+            </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question-card">
+            <div class="question-meta">Q4 · LIMIT Clause</div>
+            <div class="question-text">4. <code>LIMIT 5</code> in a SELECT query means:</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q4" value="Show only first 5 rows" required>
+                    Show only first 5 rows
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q4" value="Show last 5 rows">
+                    Show last 5 rows
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q4" value="Delete 5 rows">
+                    Delete 5 rows
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q4" value="Update 5 rows">
+                    Update 5 rows
+                </label>
+            </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="question-card">
+            <div class="question-meta">Q5 · Aggregate Functions</div>
+            <div class="question-text">5. Which function returns the smallest value from a column?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q5" value="MIN()" required>
+                    MIN()
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q5" value="LOWER()">
+                    LOWER()
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q5" value="LEAST()">
+                    LEAST()
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q5" value="SMALL()">
+                    SMALL()
+                </label>
+            </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="question-card">
+            <div class="question-meta">Q6 · Aggregate Functions</div>
+            <div class="question-text">6. Which function returns the largest value from a column?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q6" value="MAX()" required>
+                    MAX()
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q6" value="BIG()">
+                    BIG()
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q6" value="HIGH()">
+                    HIGH()
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q6" value="GREATEST()">
+                    GREATEST()
+                </label>
+            </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="question-card">
+            <div class="question-meta">Q7 · COUNT Function</div>
+            <div class="question-text">7. <code>COUNT(*)</code> is used to:</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q7" value="Count number of rows" required>
+                    Count number of rows
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q7" value="Count number of columns">
+                    Count number of columns
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q7" value="Count number of tables">
+                    Count number of tables
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q7" value="Count number of databases">
+                    Count number of databases
+                </label>
+            </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="question-card">
+            <div class="question-meta">Q8 · AVG Function</div>
+            <div class="question-text">8. <code>AVG(salary)</code> will:</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q8" value="Give average salary" required>
+                    Give average salary
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q8" value="Give maximum salary">
+                    Give maximum salary
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q8" value="Give minimum salary">
+                    Give minimum salary
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q8" value="Give total salary">
+                    Give total salary
+                </label>
+            </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="question-card">
+            <div class="question-meta">Q9 · SUM Function</div>
+            <div class="question-text">9. <code>SUM(marks)</code> gives:</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q9" value="Total marks" required>
+                    Total marks
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q9" value="Highest marks">
+                    Highest marks
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q9" value="Marks of first student">
+                    Marks of first student
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q9" value="Average marks">
+                    Average marks
+                </label>
+            </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="question-card">
+            <div class="question-meta">Q10 · ORDER BY</div>
+            <div class="question-text">10. <code>ORDER BY name ASC</code> means:</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q10" value="Sort A to Z" required>
+                    Sort A to Z
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q10" value="Sort Z to A">
+                    Sort Z to A
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q10" value="Reverse entire table">
+                    Reverse entire table
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q10" value="No effect">
+                    No effect
+                </label>
+            </div>
+        </div>
+
+        <!-- Q11 -->
+        <div class="question-card">
+            <div class="question-meta">Q11 · LIKE Pattern</div>
+            <div class="question-text">11. <code>LIKE 'A%'</code> finds:</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q11" value="Names starting with A" required>
+                    Names starting with A
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q11" value="Names ending with A">
+                    Names ending with A
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q11" value="Names containing A in the middle only">
+                    Names containing A in the middle only
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q11" value="No result">
+                    No result
+                </label>
+            </div>
+        </div>
+
+        <!-- Q12 -->
+        <div class="question-card">
+            <div class="question-meta">Q12 · BETWEEN Operator</div>
+            <div class="question-text">12. <code>BETWEEN 18 AND 25</code> selects:</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q12" value="Values from 18 to 25 including both" required>
+                    Values from 18 to 25 including both
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q12" value="Only 18 and 25">
+                    Only 18 and 25
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q12" value="Values above 25">
+                    Values above 25
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q12" value="Values below 18">
+                    Values below 18
+                </label>
+            </div>
+        </div>
+
+        <!-- Q13 -->
+        <div class="question-card">
+            <div class="question-meta">Q13 · Primary Key</div>
+            <div class="question-text">13. A PRIMARY KEY must be:</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q13" value="Unique and Not Null" required>
+                    Unique and Not Null
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q13" value="Null allowed and unique">
+                    Null allowed and unique
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q13" value="Duplicate values allowed">
+                    Duplicate values allowed
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q13" value="Optional in every table">
+                    Optional in every table
+                </label>
+            </div>
+        </div>
+
+        <!-- Q14 -->
+        <div class="question-card">
+            <div class="question-meta">Q14 · Foreign Key</div>
+            <div class="question-text">14. FOREIGN KEY is used for:</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q14" value="Table relationships" required>
+                    Table relationships
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q14" value="Formatting the output">
+                    Formatting the output
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q14" value="Sorting rows">
+                    Sorting rows
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q14" value="Temporary storage">
+                    Temporary storage
+                </label>
+            </div>
+        </div>
+
+        <!-- Q15 -->
+        <div class="question-card">
+            <div class="question-meta">Q15 · Sorting Clause</div>
+            <div class="question-text">15. Which clause is used to sort the result of a query?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q15" value="ORDER BY" required>
+                    ORDER BY
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q15" value="GROUP BY">
+                    GROUP BY
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q15" value="WHERE">
+                    WHERE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q15" value="LIMIT">
+                    LIMIT
+                </label>
+            </div>
+        </div>
+
+        <!-- Q16 -->
+        <div class="question-card">
+            <div class="question-meta">Q16 · Update Data</div>
+            <div class="question-text">16. Which statement is used to change existing data in a table?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q16" value="UPDATE" required>
+                    UPDATE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q16" value="CHANGE">
+                    CHANGE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q16" value="MODIFY">
+                    MODIFY
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q16" value="ALTER DATA">
+                    ALTER DATA
+                </label>
+            </div>
+        </div>
+
+        <!-- Q17 -->
+        <div class="question-card">
+            <div class="question-meta">Q17 · NOT NULL Constraint</div>
+            <div class="question-text">17. Which constraint is used to make sure a column cannot have empty (NULL) values?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q17" value="NOT NULL" required>
+                    NOT NULL
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q17" value="UNIQUE">
+                    UNIQUE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q17" value="CHECK">
+                    CHECK
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q17" value="DEFAULT">
+                    DEFAULT
+                </label>
+            </div>
+        </div>
+
+        <!-- Q18 -->
+        <div class="question-card">
+            <div class="question-meta">Q18 · AUTO_INCREMENT</div>
+            <div class="question-text">18. Which MySQL feature automatically generates a unique number for each new row?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q18" value="AUTO_INCREMENT" required>
+                    AUTO_INCREMENT
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q18" value="PRIMARY KEY">
+                    PRIMARY KEY
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q18" value="UNIQUE KEY">
+                    UNIQUE KEY
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q18" value="IDENTITY">
+                    IDENTITY
+                </label>
+            </div>
+        </div>
+
+        <!-- Q19 -->
+        <div class="question-card">
+            <div class="question-meta">Q19 · WHERE Clause</div>
+            <div class="question-text">19. Which clause is used to filter rows before grouping or aggregation?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q19" value="WHERE" required>
+                    WHERE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q19" value="HAVING">
+                    HAVING
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q19" value="ORDER BY">
+                    ORDER BY
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q19" value="DISTINCT">
+                    DISTINCT
+                </label>
+            </div>
+        </div>
+
+        <!-- Q20 -->
+        <div class="question-card">
+            <div class="question-meta">Q20 · HAVING Clause</div>
+            <div class="question-text">20. Which clause is used with aggregate functions to filter groups of rows?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q20" value="HAVING" required>
+                    HAVING
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q20" value="WHERE">
+                    WHERE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q20" value="GROUP BY">
+                    GROUP BY
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q20" value="ORDER BY">
+                    ORDER BY
+                </label>
+            </div>
+        </div>
+
+        <!-- Q21 -->
+        <div class="question-card">
+            <div class="question-meta">Q21 · DROP TABLE</div>
+            <div class="question-text">21. Which command is used to permanently delete a table and its data?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q21" value="DROP TABLE" required>
+                    DROP TABLE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q21" value="DELETE TABLE">
+                    DELETE TABLE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q21" value="TRUNCATE DATABASE">
+                    TRUNCATE DATABASE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q21" value="REMOVE TABLE">
+                    REMOVE TABLE
+                </label>
+            </div>
+        </div>
+
+        <!-- Q22 -->
+        <div class="question-card">
+            <div class="question-meta">Q22 · ALTER TABLE</div>
+            <div class="question-text">22. Which statement is used to modify the structure of an existing table (such as change column datatype)?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q22" value="ALTER TABLE" required>
+                    ALTER TABLE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q22" value="UPDATE TABLE">
+                    UPDATE TABLE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q22" value="MODIFY STRUCTURE">
+                    MODIFY STRUCTURE
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q22" value="CHANGE TABLE">
+                    CHANGE TABLE
+                </label>
+            </div>
+        </div>
+
+        <!-- Q23 -->
+        <div class="question-card">
+            <div class="question-meta">Q23 · LIKE with wildcards</div>
+            <div class="question-text">23. <code>WHERE title LIKE '%book%'</code> will return:</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q23" value="Titles containing the word book anywhere" required>
+                    Titles containing the word "book" anywhere
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q23" value="Titles starting with book only">
+                    Titles starting with "book" only
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q23" value="Titles ending with book only">
+                    Titles ending with "book" only
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q23" value="Titles that do not contain book">
+                    Titles that do not contain "book"
+                </label>
+            </div>
+        </div>
+
+        <!-- Q24 -->
+        <div class="question-card">
+            <div class="question-meta">Q24 · BETWEEN in query</div>
+            <div class="question-text">24. Which query correctly selects employees with salary between 30000 and 50000 (inclusive)?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q24" value="SELECT * FROM employees WHERE salary BETWEEN 30000 AND 50000;" required>
+                    SELECT * FROM employees WHERE salary BETWEEN 30000 AND 50000;
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q24" value="SELECT * FROM employees WHERE salary &gt; 30000 AND salary &lt; 50000;">
+                    SELECT * FROM employees WHERE salary &gt; 30000 AND salary &lt; 50000;
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q24" value="SELECT * FROM employees WHERE salary = 30000 OR salary = 50000;">
+                    SELECT * FROM employees WHERE salary = 30000 OR salary = 50000;
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q24" value="SELECT salary FROM employees WHERE salary RANGE 30000 TO 50000;">
+                    SELECT salary FROM employees WHERE salary RANGE 30000 TO 50000;
+                </label>
+            </div>
+        </div>
+
+        <!-- Q25 -->
+        <div class="question-card">
+            <div class="question-meta">Q25 · COUNT usage</div>
+            <div class="question-text">25. Which query returns the total number of employees in the <code>employees</code> table?</div>
+            <div class="options">
+                <label class="option-label">
+                    <input type="radio" name="q25" value="SELECT COUNT(*) FROM employees;" required>
+                    SELECT COUNT(*) FROM employees;
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q25" value="SELECT TOTAL(employees) FROM employees;">
+                    SELECT TOTAL(employees) FROM employees;
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q25" value="SELECT SUM(employees) FROM employees;">
+                    SELECT SUM(employees) FROM employees;
+                </label>
+                <label class="option-label">
+                    <input type="radio" name="q25" value="SELECT NUMBER(employees) FROM employees;">
+                    SELECT NUMBER(employees) FROM employees;
+                </label>
+            </div>
+        </div>
+
+        <div class="actions-row">
+            <button type="button" class="btn btn-primary" onclick="evaluateExam()">
+                Submit Exam
+            </button>
+            <button type="reset" class="btn btn-ghost" onclick="resetHighlights()">
+                Reset Answers
+            </button>
+        </div>
+
+        <div id="resultPanel" class="result-panel">
+            <div class="result-summary">
+                <div class="result-main" id="scoreText"></div>
+                <span class="result-tag" id="performanceTag"></span>
+            </div>
+            <div id="extraInfo" style="font-size:0.85rem; color:#047857; margin-bottom:4px;"></div>
+            <div class="answer-log" id="answerLog"></div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    const correctAnswers = {
+        q1: "CREATE DATABASE",
+        q2: "ALTER TABLE",
+        q3: "INSERT INTO",
+        q4: "Show only first 5 rows",
+        q5: "MIN()",
+        q6: "MAX()",
+        q7: "Count number of rows",
+        q8: "Give average salary",
+        q9: "Total marks",
+        q10: "Sort A to Z",
+        q11: "Names starting with A",
+        q12: "Values from 18 to 25 including both",
+        q13: "Unique and Not Null",
+        q14: "Table relationships",
+        q15: "ORDER BY",
+        q16: "UPDATE",
+        q17: "NOT NULL",
+        q18: "AUTO_INCREMENT",
+        q19: "WHERE",
+        q20: "HAVING",
+        q21: "DROP TABLE",
+        q22: "ALTER TABLE",
+        q23: "Titles containing the word book anywhere",
+        q24: "SELECT * FROM employees WHERE salary BETWEEN 30000 AND 50000;",
+        q25: "SELECT COUNT(*) FROM employees;"
+    };
+
+    function resetHighlights() {
+        document.getElementById("resultPanel").style.display = "none";
+        document.getElementById("answerLog").innerHTML = "";
+        document.getElementById("scoreText").innerText = "";
+        document.getElementById("performanceTag").innerText = "";
+        document.getElementById("performanceTag").className = "result-tag";
+
+        const labels = document.querySelectorAll(".option-label");
+        labels.forEach(label => {
+            label.classList.remove("correct-option", "wrong-option");
+        });
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function evaluateExam() {
+        const form = document.getElementById("examForm");
+        const totalQuestions = Object.keys(correctAnswers).length;
+
+        // Remove old highlights
+        const labels = document.querySelectorAll(".option-label");
+        labels.forEach(label => {
+            label.classList.remove("correct-option", "wrong-option");
+        });
+
+        // Check all answered
+        for (let q in correctAnswers) {
+            const selected = form.querySelector(`input[name="${q}"]:checked`);
+            if (!selected) {
+                alert("Please answer all questions before submitting the exam.");
+                return;
+            }
+        }
+
+        let score = 0;
+        let logHtml = "";
+
+        // Evaluate
+        for (let q in correctAnswers) {
+            const correctValue = correctAnswers[q];
+            const selectedInput = form.querySelector(`input[name="${q}"]:checked`);
+            const selectedValue = selectedInput ? selectedInput.value : null;
+
+            // Highlight options
+            const optionInputs = form.querySelectorAll(`input[name="${q}"]`);
+            optionInputs.forEach(input => {
+                const label = input.parentElement;
+                if (input.value === correctValue) {
+                    label.classList.add("correct-option");
+                }
+                if (selectedValue === input.value && selectedValue !== correctValue) {
+                    label.classList.add("wrong-option");
+                }
+            });
+
+            if (selectedValue === correctValue) {
+                score++;
+                logHtml += `<p class="answer-correct">${q.toUpperCase()}: Correct ✔</p>`;
+            } else {
+                logHtml += `<p class="answer-wrong">${q.toUpperCase()}: Wrong ✘ (Correct: ${correctValue})</p>`;
+            }
+        }
+
+        const percentage = ((score / totalQuestions) * 100).toFixed(2);
+        const scoreText = `Score: ${score} / ${totalQuestions} (${percentage}%)`;
+        let performance = "";
+        let tagClass = "result-tag";
+
+        if (percentage >= 80) {
+            performance = "Excellent – Strong MySQL basics!";
+            tagClass += " tag-good";
+        } else if (percentage >= 50) {
+            performance = "Good – Keep practicing!";
+            tagClass += " tag-ok";
+        } else {
+            performance = "Needs improvement – Revise the concepts.";
+            tagClass += " tag-bad";
+        }
+
+        document.getElementById("resultPanel").style.display = "block";
+        document.getElementById("scoreText").innerText = scoreText;
+        document.getElementById("performanceTag").innerText = performance;
+        document.getElementById("performanceTag").className = tagClass;
+        document.getElementById("answerLog").innerHTML = logHtml;
+        document.getElementById("extraInfo").innerText =
+            "Green = Correct option, Red = Your wrong selection (if any).";
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+</script>
+
+</body>
+</html>
